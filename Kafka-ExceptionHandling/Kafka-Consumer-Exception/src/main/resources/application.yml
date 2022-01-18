@@ -1,0 +1,9 @@
+spring:
+  kafka:
+    consumer:
+      enable-auto-commit: true
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092,localhost:9091,localhost:9093
+server:
+  port: 8082
+      
