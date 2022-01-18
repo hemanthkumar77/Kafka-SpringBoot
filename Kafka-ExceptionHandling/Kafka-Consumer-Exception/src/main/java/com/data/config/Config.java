@@ -49,8 +49,6 @@ public class Config {
 		// here we are configuring the DeadLetterPublishingRecoverer such that the failed records are being processed to the new topic and checking whether that topic has the same partition count 
 		DeadLetterPublishingRecoverer recover = new DeadLetterPublishingRecoverer(kafka,(record,ex)->new TopicPartition("t_emp_dlt",record.partition()));
 		// so here it will make sure that the failed messages will be consider has the pending messages needs to be processed 
-		// here we are using the retry mechanism to 5 retry, 10 second interval for each retry
-		//SeekToCurrentErrorHandler data = new SeekToCurrentErrorHandler(recover, new FixedBackOff(10_000, 5));
         details.setErrorHandler(new GlobalErrorHandler());
         details.setRetryTemplate(template());
         return details;
