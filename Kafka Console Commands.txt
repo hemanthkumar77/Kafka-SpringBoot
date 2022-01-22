@@ -1,0 +1,39 @@
+Kafka Server port number:9092
+Zookeeper Server port number:2181
+----------------------KAFKA CONSOLE COMMANDS---------------------
+To Start The Zookeeper Server Command:
+--> zookeeper-server-start.bat ..\..\config\zookeeper.properties
+
+To Start the Kafka Server Command:(starting a broker)
+--> kafka-server-start.bat ..\..\config\server.properties
+
+To Create A New Topic(with 4 partitions)
+(created a topic has test-topic)
+kafka-topics.bat --create --topic test-topic -zookeeper localhost:2181 --replication-factor 1 --partitions 4
+
+To alter the topic( changing replication factor , changing partitions)
+kafka-topics.bat --alter --zookeeper localhost:2181 --topic my-topic --partitions 3
+
+To delete the topic
+kafka-topics.bat  --bootstrap-server localhost:9092 --delete --topic t_employee
+kafka-topics.bat --delete --zookeeper localhost:2181 --topic t_employee
+
+To See the Topic Partitions Leaders(Brokers) and the Insync replicas details:
+kafka-topics.bat --zookeeper localhost:2181 --describe --topic topicName
+
+To see the list of topics in the cluster:
+kafka-topics.bat --zookeeper localhost:2181 --list
+
+To Instantiate The Console Producer(without Key):
+(started the producer for the test-topic)
+kafka-console-producer.bat --broker-list localhost:9092 --topic test-topic
+
+To Instantiate the Console Consumer(without key):
+(from begining means from the starting it will read the message)
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic --from-beginning 
+
+To see the total available consumer groups:
+kafka-consumer-groups.bat --bootstrap-server localhost:9092 --list
+
+To See the key values pair store in the partitions:
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-distribution --offset earliest --partition number
